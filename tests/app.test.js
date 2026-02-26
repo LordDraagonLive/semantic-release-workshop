@@ -49,6 +49,12 @@ describe('GET /users/:id', () => {
     expect(res.statusCode).toBe(404);
     expect(res.body).toHaveProperty('error');
   });
+
+  it('should return 400 for invalid user id', async () => {
+    const res = await request(app).get('/users/abc');
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toHaveProperty('error', 'Invalid user ID');
+  });
 });
 
 describe('POST /users', () => {
